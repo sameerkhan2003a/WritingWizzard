@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .navbar {
+        background-color: #4B0082;
+        color: Yellow; /* Indigo color for a magical feel */
+      }
+ 
+      .navbar .navbar-text,
+      .navbar .navbar-nav .nav-link {
+        color: Yellow; /* Golden text for a mystical touch */
+      }
+      .footer {
+        background-color: #4B0082; /* Same indigo color for the footer */
+        color:Yellow; /* Golden text for the footer */
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 0;
+        margin-top: 0;
+      }
+      body {
+        background-image: url("https://th.bing.com/th/id/OIG.yOi.v2nc7ISK.cceif8k?pid=ImgGn"); /* Consider changing this to a wizard-themed image */
+        background-size: cover; /* This will make the background image cover the entire body */
+      }
+ 
+        .container {
+          background-color: #4B0082; /* Indigo background for the container */
+          color:Yellow; /* Golden text for the container */
+          padding: 40px;
+          border-radius: 25px;
+          margin-top: 130px;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+           /* Center the container */
+        }
+ 
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WritingWizard</title> <!-- Changed the title to match the theme -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+     
+    <nav class="navbar navbar-dark  fixed-top" style="color:yellow;">
+      <div class="container-fluid">
+        <img src="https://th.bing.com/th/id/OIG.QI_s0O3ynENvRIn4iH65?pid=ImgGn" height="70px" width="70px">
+        <a class="navbar-brand" href="#" style="color:yellow;">WritingWizard</a> <!-- Changed span to a for proper semantics -->
+        <button style="background-color: #4B0082;color:yellow;"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasDarkNavbar"
+          aria-controls="offcanvasDarkNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end text-bg-dark "style="background-color: #4B0082;"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div class="offcanvas-header"style="background-color: #4B0082;">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"style="color:yellow; background-color: #4B0082;">
+             <u>WritingWizard</u>
+            </h5>
+            <button style="background-color: #4B0082;"
+              type="button"
+              class="btn-close btn-close-yellow"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body"style="background-color: #4B0082;">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="/index">Home</a>
+              </li>
+                  <li class="nav-item">
+                      <a class="nav-link " href="about">About</a>
+                  </li>
+                  {% if session['username'] %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('Logout') }}">Logout</a>
+                  </li>
+              {% endif %}
+           
+               
+      
+  
+              </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
+
+<div class="container my-6 py-5">
+    <h2 style="color:yellow; font-size: 2.5em;"align="center">WritingWizard</h2>
+    <form action="/index" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="essayLength" style="font-size:20px">Select the length of your essay:</label>
+            <select class="form-control" id="essayLength" name="essayLength">
+                <option value="mini">Mini (250 words)</option>
+    <option value="short">Short (500 words)</option>
+    <option value="medium">Medium (1000 words)</option>
+    <option value="long">Long (2000 words)</option>
+    <option value="extended">Extended (3000 words)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="essayQuality" style="font-size:20px">Select the quality of your essay:</label>
+            <select class="form-control" id="essayQuality" name="essayQuality">
+                <option value="basic">Basic</option>
+                <option value="standard">Standard</option>
+                <option value="premium">Premium</option>
+                <option value="advanced">Advanced</option>
+                <option value="elite">Elite</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="essayTopic" style="font-size:20px">Enter the topic of your essay:</label>
+            <input type="text" class="form-control" id="essayTopic" name="essayTopic">
+        </div>
+            <button type="submit" class="btn btn-dark" style="font-size:15px">Create Magic</button>
+            <div class="form-group">
+                <label for="result" style="font-size:20px">Result:</label>
+                <textarea class="form-control" id="result" placeholder="WritingWizard is here to help you."
+                          name="result" rows="7">{{ result or '' }}</textarea>
+            </div>
+        </form>
+</div>
+
+<div class="footer">
+  <p>Follow us on:</p>
+  <div class="footer-icons">
+</div>
+<a href="mailto:sameerkhan2003a@gmail.com"><img src="https://th.bing.com/th/id/R.88d88f1872909358b97ffa695cb97b66?rik=A77az%2fwRYB%2bLrw&riu=http%3a%2f%2flogos-download.com%2fwp-content%2fuploads%2f2016%2f05%2fGmail_logo_icon.png&ehk=8gYQfqc8h6fYCXddKEQE%2blQ7004YVwPu1S2LSHmiUgE%3d&risl=&pid=ImgRaw&r=0" alt="Gmail" style="width:32px;height:22px;"></a>
+<a href="https://twitter.com/your_twitter_handle"><img src="https://th.bing.com/th?id=OSK.50a4337ddb8f32c31afe1610d3d99f0b&w=102&h=102&c=7&o=6&oif=webp&dpr=1.3&pid=SANGAM" alt="Twitter" style="width:32px;height:22px;"></a>
+<a href="https://www.facebook.com/your_facebook_page"><img src="https://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19757.png" alt="Facebook" style="width:32px;height:22px;"></a>
+<p>&copy; 2023 Sameer Khan</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
